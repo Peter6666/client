@@ -2,6 +2,7 @@ package com.logic.client.rx;
 
 import com.jakewharton.rxrelay2.PublishRelay;
 import com.jakewharton.rxrelay2.Relay;
+import com.logic.client.mvp.view.fragment.HomeFragment;
 
 import org.reactivestreams.Subscription;
 
@@ -24,7 +25,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxBus {
 
-    public static volatile RxBus intance = null;
+    private static volatile RxBus intance = null;
 
     private final Relay<Object> mBus;
     //    private final Subject<Object> mBus;
@@ -91,6 +92,7 @@ public class RxBus {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(next, error);
+
     }
 
     /**
@@ -136,6 +138,14 @@ public class RxBus {
         }
 
         mSubscriptionMapper.remove(key);
+    }
+
+    public void unSubscribe(){
+        if (mSubscriptionMapper == null) {
+            return;
+        }
+        mSubscriptionMapper.clear();
+
     }
 
 }

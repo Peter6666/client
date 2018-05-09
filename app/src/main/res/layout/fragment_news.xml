@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<com.logic.client.widget.LgLinearLayout-->
+        <!--android:id="@+id/lly"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:clickable="true"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--android:orientation="vertical"></com.logic.client.widget.LgLinearLayout>-->
+
+    <include layout="@layout/loadding" android:id="@+id/ly_loadding"></include>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_loadmore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

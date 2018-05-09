@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorText"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_appbar"></include>
+
+    <android.support.v4.view.ViewPager
+        android:layout_weight="1"
+        android:id="@+id/vp_pic"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"></android.support.v4.view.ViewPager>
+
+    <TextView
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/sp_16"
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite" />
+</LinearLayout>
