@@ -48,10 +48,13 @@ public abstract class BaseFragment<P extends BasePresenter> extends RxFragment i
             rootView = inflater.inflate(getLayoutId(), container, false);
         }
         bind = ButterKnife.bind(this, rootView);
+        initBar();
         initView();
         initData();
         return rootView;
     }
+
+    protected abstract void initBar();
 
 
     public void startActivity(Class<?> clss) {
@@ -59,8 +62,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends RxFragment i
         intent.setClass(mActivity, clss);
         startActivity(intent);
     }
-
-    ;
 
     /**
      * @param <T>

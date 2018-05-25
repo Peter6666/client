@@ -4,19 +4,13 @@ package com.logic.client.mvp.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.github.chrisbanes.photoview.PhotoView;
 import com.logic.client.R;
 import com.logic.client.adapter.BaseFragmentPagerAdapter;
-import com.logic.client.adapter.BasePagerAdapter;
 import com.logic.client.adapter.GridAdapter;
 import com.logic.client.mvp.view.fragment.PhotoViewFragment;
 import com.logic.client.rx.base.BaseAppCompatActivity;
@@ -41,8 +35,9 @@ public class PictureActivity extends BaseAppCompatActivity {
     @BindView(R.id.tv_content)
     TextView tvContent;
 
-    private ArrayList<String> imgUrl;
+    private ArrayList<String> imgUrls;
     private String title;
+    private String imgUrl;
     private GridAdapter mAdapter;
     private ArrayList<Fragment> photoViewFragments;
     private int size;
@@ -55,18 +50,26 @@ public class PictureActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         Intent intent = getIntent();
-        imgUrl = intent.getStringArrayListExtra("imgUrl");
+        imgUrls = intent.getStringArrayListExtra("imgUrls");
+        imgUrl = intent.getStringExtra("imgUrl");
         title = intent.getStringExtra("title");
-        size = imgUrl.size();
+        if (imgUrls != null)
+            size = imgUrls.size();
     }
 
     @Override
     protected void initData() {
         photoViewFragments = new ArrayList<>();
-        for (int i = 0; i <size ; i++) {
-            PhotoViewFragment photoViewFragment = new PhotoViewFragment(imgUrl.get(i));
+        if (imgUrls != null) {
+            for (int i = 0; i < size; i++) {
+                PhotoViewFragment photoViewFragment = new PhotoViewFragment(imgUrls.get(i));
+                photoViewFragments.add(photoViewFragment);
+            }
+        } else {
+            PhotoViewFragment photoViewFragment = new PhotoViewFragment(imgUrl);
             photoViewFragments.add(photoViewFragment);
         }
+
         BaseFragmentPagerAdapter baseFragmentPagerAdapter = new BaseFragmentPagerAdapter(getSupportFragmentManager(), photoViewFragments);
         vp_pic.setAdapter(baseFragmentPagerAdapter);
 
@@ -74,7 +77,8 @@ public class PictureActivity extends BaseAppCompatActivity {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
                 i++;
-                tvContent.setText(i+"/"+size+"  "+title);
+                if (title != null)
+                    tvContent.setText(i + "/" + size + "  " + title);
             }
 
             @Override

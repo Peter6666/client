@@ -2,8 +2,8 @@ package com.logic.client.mvp.presenter;
 
 import com.logic.client.app.AppConstants;
 import com.logic.client.bean.NewsChannelTabs;
-import com.logic.client.mvp.model.HomeModel;
-import com.logic.client.mvp.view.fragment.HomeFragment;
+import com.logic.client.mvp.model.NewsMianModel;
+import com.logic.client.mvp.view.fragment.NewsMianFragment;
 import com.logic.client.rx.RxBus;
 import com.logic.client.rx.base.mvp.BasePresenter;
 
@@ -22,7 +22,7 @@ import io.reactivex.functions.Consumer;
  * @desc
  */
 
-public class HomePresenter extends BasePresenter<HomeModel, HomeFragment> {
+public class NewsMianPresenter extends BasePresenter<NewsMianModel, NewsMianFragment> {
 
 
 //    public void getdata( final List<Results> results, int page, int size) {
@@ -91,13 +91,12 @@ public class HomePresenter extends BasePresenter<HomeModel, HomeFragment> {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RxBus.getIntance().unSubscribe(AppConstants.NEWS_TO_TOP);
         RxBus.getIntance().unSubscribe(AppConstants.TAB);
     }
 
     @Override
-    protected HomeModel initModel() {
-        return new HomeModel();
+    protected NewsMianModel initModel() {
+        return new NewsMianModel();
     }
 
     public void toTop() {
@@ -108,7 +107,9 @@ public class HomePresenter extends BasePresenter<HomeModel, HomeFragment> {
         Disposable event = RxBus.getIntance().doSubscribe(String.class, new Consumer<String>() {
             @Override
             public void accept(String o) throws Exception {
-                getSelectChannel();
+                 if (o.equals(AppConstants.TAB)){
+                   getSelectChannel();
+               }
             }
         }, new Consumer<Throwable>() {
             @Override

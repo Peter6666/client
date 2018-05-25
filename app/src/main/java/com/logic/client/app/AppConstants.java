@@ -9,5 +9,7 @@ package com.logic.client.app;
 public class AppConstants {
 
     public static String NEWS_TO_TOP = "NEWS_TO_TOP";
+    public static String LIVE_TO_TOP = "LIVE_TO_TOP";
+    public static String SET_THEME = "SET_THEME";
     public static String TAB = "TAB";
 }

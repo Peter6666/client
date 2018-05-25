@@ -3,11 +3,14 @@
     android:layout_width="300dp"
     android:layout_height="240dp"
     android:orientation="vertical">
+
     <LinearLayout
+        android:id="@+id/ly_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        >
 
         <TextView
             android:id="@+id/tv_title"
@@ -15,16 +18,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:lines="1"
-            android:textSize="20dp"
-            />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:textSize="18dp"
-            />
+            android:textSize="18dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -42,16 +43,35 @@
                 android:textColor="@color/colorBlue" />
 
             <TextView
-                android:layout_toLeftOf="@id/tv_ok"
                 android:id="@+id/tv_cance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:layout_toLeftOf="@id/tv_ok"
                 android:text="取消"
                 android:textColor="@color/colorDark" />
-
 
         </RelativeLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_loadding"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loadding" />
+    </LinearLayout>
+
 </LinearLayout>

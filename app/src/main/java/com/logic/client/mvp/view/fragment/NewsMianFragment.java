@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,19 +16,15 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.logic.client.R;
 import com.logic.client.adapter.BaseFragmentPagerAdapter;
-import com.logic.client.app.AppConstants;
 import com.logic.client.bean.NewsChannelTabs;
-import com.logic.client.mvp.presenter.HomePresenter;
+import com.logic.client.mvp.presenter.NewsMianPresenter;
 import com.logic.client.mvp.view.activity.NewsTabTagActivity;
-import com.logic.client.rx.RxBus;
 import com.logic.client.rx.base.mvp.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author logic.    Email:2778500267@qq.com
@@ -37,7 +32,7 @@ import io.reactivex.functions.Consumer;
  * @desc
  */
 
-public class HomeFragment extends BaseFragment<HomePresenter> implements BaseQuickAdapter.UpFetchListener, View.OnClickListener {
+public class NewsMianFragment extends BaseFragment<NewsMianPresenter> implements BaseQuickAdapter.UpFetchListener, View.OnClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -50,10 +45,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements BaseQui
     @BindView(R.id.vp_home)
     ViewPager vpHome;
 
-    private List<Fragment> mNewsFragments;
+    private List<NewsFragment> mNewsFragments;
     private BaseFragmentPagerAdapter mFragmentPagerAdapter;
 
-    public HomeFragment(int i) {
+    public NewsMianFragment(int i) {
         super();
     }
 
@@ -68,12 +63,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements BaseQui
         fab.setOnClickListener(this);
     }
 
-    private void initBar() {
+    public void initBar() {
 
-        toolbar.setTitle("首页");
+        toolbar.setTitle(R.string.home);
         toolbar.setTitleTextColor(Color.WHITE);
         mPresenter.getSelectChannel();
-
 //        new BasePagerAdapter(mActivity,)
 //        vpHome.setAdapter();
 
@@ -107,8 +101,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements BaseQui
     }
 
     @Override
-    protected HomePresenter initPresenter() {
-        return new HomePresenter();
+    protected NewsMianPresenter initPresenter() {
+        return new NewsMianPresenter();
     }
 
     @Override
@@ -156,15 +150,48 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements BaseQui
     public void returnSelectChannel(List<NewsChannelTabs> newsChannelTabses) {
         if (newsChannelTabses == null)
             return;
+
         if (mNewsFragments == null)
             mNewsFragments = new ArrayList<>();
 
         int size = newsChannelTabses.size();
         mNewsFragments.clear();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i <size ; i++) {
             NewsFragment newsFragment = new NewsFragment(newsChannelTabses.get(i).getName());
             mNewsFragments.add(newsFragment);
         }
+        
+//        Log.i("ceshi"," size=" + mNewsFragments.size());
+//        for (int i = 0; i < size; i++) {
+//            boolean isExit = false;
+//            String newName = newsChannelTabses.get(i).getName();
+//            NewsFragment newsFragment = new NewsFragment(newName);
+//            for (NewsFragment item : mNewsFragments) {
+//                String name = item.getName();
+//                if (name.equals(newName)) {
+//                    isExit = true;
+//                    break;
+//                }
+//            }
+//            if (!isExit)
+//                mNewsFragments.add(newsFragment);
+//        }
+//
+//        int len = mNewsFragments.size();
+//        Log.i("ceshi", "len=" + len + " size=" + size);
+//        for (int i = 0; i < len; i++) {
+//            String newName = newsChannelTabses.get(i).getName();
+//            String name = mNewsFragments.get(i).getName();
+//            if (!name.equals(newName)) {
+//                for (int j = i; j < len; j++) {
+//                    String temp = mNewsFragments.get(i).getName();
+//                    if (newName.equals(temp)) {
+//                        Collections.swap(mNewsFragments, i, j);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
 
         if (mFragmentPagerAdapter == null) {
             mFragmentPagerAdapter = new BaseFragmentPagerAdapter(getChildFragmentManager(), mNewsFragments);

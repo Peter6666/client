@@ -8,10 +8,12 @@ package com.logic.client.net;
 
 public class OkConstants {
 
-    public static final int TYPE_COUNT = 2;
+    public static final int TYPE_COUNT = 3;
     public static final int TYPE_GANK_HOST = 0;
     public static final int TYPE_ALI_HOST = 1;
     public static final int TYPE_IDATA_HOST = 2;
+    public static final int TYPE_NETEAST_HOST = 3;
+    public static final int TYPE_LIVE_HOST = 4;
 
 
 
@@ -32,4 +34,20 @@ public class OkConstants {
     public static final String IDATA_HOST = "http://api01.bitspaceman.com:8000/news/";
     public static final String IDATA_APPKEY = "jcAQAjAOiG2XsYK7nxJvvfxm944yUOzAV0UU9e0gEKifjJUAIYBjdTzjPvDsho1Z";
 
+
+    public static final String NETEAST_HOST = "http://c.m.163.com/";
+    public static final String END_URL = "-20.html";
+    public static final String ENDDETAIL_URL = "/full.html";
+
+    // 新闻详情
+    public static final String NEWS_DETAIL = NETEAST_HOST + "nc/article/";
+    // 头条TYPE
+    public static final String HEADLINE_TYPE = "headline";
+    // 房产TYPE
+    public static final String HOUSE_TYPE = "house";
+    // 其他TYPE
+    public static final String OTHER_TYPE = "list";
+
+
+    public static final String LIVE_HOST = "http://www.quanmin.tv/";
 }

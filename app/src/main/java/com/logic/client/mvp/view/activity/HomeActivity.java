@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.widget.TextView;
 
 import com.logic.client.R;
-import com.logic.client.mvp.presenter.HomePresenter;
+import com.logic.client.mvp.presenter.NewsMianPresenter;
 import com.logic.client.rx.base.mvp.BaseActivity;
 
 /**
@@ -14,13 +14,13 @@ import com.logic.client.rx.base.mvp.BaseActivity;
  * @desc
  */
 
-public class HomeActivity extends BaseActivity<HomePresenter> {
+public class HomeActivity extends BaseActivity<NewsMianPresenter> {
 
     private TextView viewById;
 
     @Override
-    protected HomePresenter initPresenter() {
-        return new HomePresenter();
+    protected NewsMianPresenter initPresenter() {
+        return new NewsMianPresenter();
     }
 
     @Override

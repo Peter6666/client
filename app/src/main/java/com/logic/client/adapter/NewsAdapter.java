@@ -15,6 +15,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -113,7 +114,7 @@ public class NewsAdapter extends BaseMultiItemQuickAdapter<IdataNews.Idate, Base
             @Override
             public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                 Intent intent = new Intent(mContext,PictureActivity.class);
-                intent.putStringArrayListExtra("imgUrl",imageUrls);
+                intent.putStringArrayListExtra("imgUrls",imageUrls);
                 intent.putExtra("title",title);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
@@ -158,6 +159,7 @@ public class NewsAdapter extends BaseMultiItemQuickAdapter<IdataNews.Idate, Base
                 .load(imageUrls.get(0))
                 .placeholder(R.mipmap.ic_default_img)
                 .error(R.mipmap.ic_default_img)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_gv_img);
 
     }

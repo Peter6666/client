@@ -108,6 +108,10 @@ public class OkClient {
             return OkConstants.ALI_HOST;
         else if (type == OkConstants.TYPE_IDATA_HOST)
             return OkConstants.IDATA_HOST;
+        else if (type == OkConstants.TYPE_NETEAST_HOST)
+            return OkConstants.NETEAST_HOST;
+        else if (type == OkConstants.TYPE_LIVE_HOST)
+            return OkConstants.LIVE_HOST;
 
             return OkConstants.GANK_HOST;
     }

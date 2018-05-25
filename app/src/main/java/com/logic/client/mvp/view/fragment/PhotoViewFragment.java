@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.logic.client.R;
 import com.logic.client.rx.base.BaseFragment;
@@ -40,6 +41,9 @@ public class PhotoViewFragment extends BaseFragment {
 
         Glide.with(mActivity)
                 .load(img)
+                .placeholder(R.mipmap.ic_default_img)
+                .error(R.mipmap.ic_default_img)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(pvPic);
     }
 

@@ -1,5 +1,7 @@
 package com.logic.client.mvp.presenter;
 
+import android.util.Log;
+
 import com.logic.client.R;
 import com.logic.client.app.AppConstants;
 import com.logic.client.bean.IdataNews;
@@ -110,7 +112,9 @@ public class NewsPresenter extends BasePresenter<NewsModel,NewsFragment> {
         Disposable event = RxBus.getIntance().doSubscribe(String.class, new Consumer<String>() {
             @Override
             public void accept(String o) throws Exception {
-               getView().ScrollToTop();
+                if (o.equals(AppConstants.NEWS_TO_TOP)){
+                    getView().ScrollToTop();
+                }
             }
         }, new Consumer<Throwable>() {
             @Override

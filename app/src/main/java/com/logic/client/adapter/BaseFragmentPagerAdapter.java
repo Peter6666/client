@@ -13,17 +13,17 @@ import java.util.List;
  * @desc
  */
 
-public class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
+public class BaseFragmentPagerAdapter<T extends Fragment> extends FragmentPagerAdapter {
 
-    private final List<Fragment> mDate;
+    private final List<T> mDate;
 
-    public BaseFragmentPagerAdapter(FragmentManager fm, List<Fragment> date) {
+    public BaseFragmentPagerAdapter(FragmentManager fm, List<T> date) {
         super(fm);
         mDate = date;
     }
 
     @Override
-    public Fragment getItem(int i) {
+    public T getItem(int i) {
         return mDate.get(i);
     }
 

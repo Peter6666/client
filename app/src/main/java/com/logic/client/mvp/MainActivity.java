@@ -1,15 +1,9 @@
 package com.logic.client.mvp;
 
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,16 +11,17 @@ import android.widget.TextView;
 
 import com.logic.client.R;
 import com.logic.client.adapter.BaseFragmentPagerAdapter;
-import com.logic.client.mvp.view.fragment.HomeFragment;
+import com.logic.client.mvp.view.fragment.LiveMianFragment;
+import com.logic.client.mvp.view.fragment.NewsMianFragment;
+import com.logic.client.mvp.view.fragment.LiveFragment;
+import com.logic.client.mvp.view.fragment.MineFragment;
 import com.logic.client.mvp.view.fragment.WelfareFragment;
-import com.logic.client.rx.base.BaseActivity;
 import com.logic.client.rx.base.BaseAppCompatActivity;
+import com.logic.client.rx.base.BaseApplication;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author logic.    Email:2778500267@qq.com
@@ -37,13 +32,16 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseAppCompatActivity implements TabLayout.OnTabSelectedListener {
 
 
-
     @BindView(R.id.vp_content_main)
     ViewPager vpContentMain;
     @BindView(R.id.ty_bottom_tab)
     TabLayout tyBottomTab;
 
-    private String[] mTabs = {"首页", "福利", "视频", "我的"};
+    private String[] mTabs = {BaseApplication.getResource().getString(R.string.home),
+            BaseApplication.getResource().getString(R.string.welfare),
+            BaseApplication.getResource().getString(R.string.video),
+//            BaseApplication.getResource().getString(R.string.mine)
+    };
 
     private int[] mUnSelectTab = {R.mipmap.icon_tabbar_subscription, R.mipmap.icon_tabbar_notification,
             R.mipmap.icon_tabbar_home, R.mipmap.icon_tabbar_me};
@@ -61,14 +59,14 @@ public class MainActivity extends BaseAppCompatActivity implements TabLayout.OnT
     protected void initView() {
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        HomeFragment fragment = new HomeFragment(1);
+        NewsMianFragment fragment = new NewsMianFragment(1);
         WelfareFragment welfareFragment = new WelfareFragment();
-        WelfareFragment fragment2 = new WelfareFragment();
-        WelfareFragment fragment3 = new WelfareFragment();
+        LiveMianFragment fragment2 = new LiveMianFragment();
+        MineFragment fragment3 = new MineFragment();
         fragments.add(fragment);
         fragments.add(welfareFragment);
         fragments.add(fragment2);
-        fragments.add(fragment3);
+//        fragments.add(fragment3);
         BaseFragmentPagerAdapter baseFragmentPagerAdapter = new BaseFragmentPagerAdapter(getSupportFragmentManager(), fragments);
         vpContentMain.setAdapter(baseFragmentPagerAdapter);
         vpContentMain.setOffscreenPageLimit(4);

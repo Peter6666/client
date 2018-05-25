@@ -2,9 +2,6 @@ package com.logic.client.rx;
 
 import com.jakewharton.rxrelay2.PublishRelay;
 import com.jakewharton.rxrelay2.Relay;
-import com.logic.client.mvp.view.fragment.HomeFragment;
-
-import org.reactivestreams.Subscription;
 
 import java.util.HashMap;
 

@@ -6,6 +6,8 @@ import android.content.res.Resources;
 
 import com.logic.client.rx.RxBus;
 
+import io.vov.vitamio.Vitamio;
+
 /**
  * @author logic.    Email:2778500267@qq.com
  * @data 2018/4/23
@@ -22,6 +24,7 @@ public class BaseApplication extends Application {
         super.onCreate();
         mContext = this;
         resources = mContext.getResources();
+        boolean initialized = Vitamio.isInitialized(mContext);
     }
 
     public static Context getAppContext() {

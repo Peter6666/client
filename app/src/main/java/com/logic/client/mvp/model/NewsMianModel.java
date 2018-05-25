@@ -30,7 +30,7 @@ import io.reactivex.functions.Function;
  * @desc
  */
 
-public class HomeModel extends BaseModel {
+public class NewsMianModel extends BaseModel {
 
 //    public Flowable<List<Results>> getData(int page , int size , final List<Results> data){
 //        return OkClient.getDefault(OkConstants.TYPE_GANK_HOST).getWelfareList(size,page)

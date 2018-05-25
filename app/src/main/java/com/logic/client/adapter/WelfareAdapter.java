@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.logic.client.R;
@@ -32,6 +33,7 @@ public class WelfareAdapter extends BaseQuickAdapter<Results,BaseViewHolder> {
                 .load(itemData.getUrl())
                 .placeholder(R.mipmap.ic_default_img)
                 .error(R.mipmap.ic_default_img)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_rcv_home_img);
     }
 }

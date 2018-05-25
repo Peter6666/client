@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.logic.client.R;
 import com.logic.client.adapter.NewsTabTagAdapter;
+import com.logic.client.app.AppConstants;
 import com.logic.client.bean.NewsChannelTabs;
 import com.logic.client.mvp.presenter.NewsTabTagPresenter;
 import com.logic.client.rx.RxBus;
@@ -61,6 +62,11 @@ public class NewsTabTagActivity extends BaseAppCompatActivity<NewsTabTagPresente
 
 
     @Override
+    protected void initBar() {
+        setBar(toolbar,R.string.all_columns,R.mipmap.ic_back);
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.activity_news_tabtag;
     }
@@ -72,6 +78,8 @@ public class NewsTabTagActivity extends BaseAppCompatActivity<NewsTabTagPresente
 
     @Override
     protected void initView() {
+
+
         GridLayoutManager linearLayoutManager = new GridLayoutManager(mActivity, 4);
         GridLayoutManager linearLayoutManager1 = new GridLayoutManager(mActivity, 4);
         rcvNewsTag.setLayoutManager(linearLayoutManager);
@@ -257,8 +265,7 @@ public class NewsTabTagActivity extends BaseAppCompatActivity<NewsTabTagPresente
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("ceshi","onStop");
-        RxBus.getIntance().post("TAB");
+        RxBus.getIntance().post(AppConstants.TAB);
     }
 
     @Override

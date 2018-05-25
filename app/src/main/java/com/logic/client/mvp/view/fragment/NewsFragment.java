@@ -1,11 +1,15 @@
 package com.logic.client.mvp.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,6 +20,7 @@ import com.logic.client.adapter.NewsAdapter;
 import com.logic.client.app.AppConstants;
 import com.logic.client.bean.IdataNews;
 import com.logic.client.mvp.presenter.NewsPresenter;
+import com.logic.client.mvp.view.activity.NewsDetailsActivity;
 import com.logic.client.rx.RxBus;
 import com.logic.client.rx.base.BaseApplication;
 import com.logic.client.rx.base.mvp.BaseFragment;
@@ -56,8 +61,17 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
     private ArrayList<IdataNews.Idate> mData;
     public static int STATUS_CURRENT = 0;
 
+    public String getName() {
+        return name;
+    }
+
     public NewsFragment(String name) {
         this.name = name;
+    }
+
+    @Override
+    protected void initBar() {
+
     }
 
     @Override
@@ -118,6 +132,19 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
                 mPresenter.getQQnews(mData, name, mPage);
             }
         });
+
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                String url = mData.get(i).getUrl();
+                Intent intent = new Intent(mActivity, NewsDetailsActivity.class);
+                intent.putExtra("url",url);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mActivity.startActivity(intent);
+
+            }
+        });
+
     }
 
 
@@ -160,7 +187,6 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
         Log.i("ceshi", "onSaveInstanceState==" + name);
     }
 
-
     public void returnData(List<IdataNews.Idate> idates) {
 
         if (idates.size() <= 0)
@@ -174,17 +200,17 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
     @Override
     public void showError(String msg) {
 
-        if (mErr < 3) {
-            mErr++;
-            mPresenter.getQQnews(mData, name, mPage);
-            return;
-        } else {
-            mErr = 0;
-            srl_loadmore.setRefreshing(false);
-            if (mPage == 1)
-                setLoadStatus(LgLinearLayout.STATUS_FAIL);
-        }
-
+//        if (mErr < 3) {
+//            mErr++;
+//            mPresenter.getQQnews(mData, name, mPage);
+//            return;
+//        } else {
+//            mErr = 0;
+//            srl_loadmore.setRefreshing(false);
+//            if (mPage == 1)
+//                setLoadStatus(LgLinearLayout.STATUS_FAIL);
+//        }
+        setLoadStatus(LgLinearLayout.STATUS_FAIL);
         mAdapter.loadMoreFail();
 //        Log.i("ceshi","showError"+name +msg);
     }
@@ -223,5 +249,6 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
     public void onDestroy() {
         super.onDestroy();
         mPresenter.onDestroy();
+        Log.i("ceshi",name+"   onDestroy");
     }
 }

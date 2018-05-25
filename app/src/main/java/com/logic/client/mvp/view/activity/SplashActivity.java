@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.logic.client.R;
 import com.logic.client.bean.GankData;
 import com.logic.client.bean.Results;
@@ -65,7 +66,9 @@ public class SplashActivity extends BaseActivity {
     protected void initData() {
         Glide.with(this)
                 .load(IMG_URL)
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.ic_default_img)
+                .error(R.mipmap.ic_default_img)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_sp);
 
 //        OkClient.getDefault(1).getWelfareList(10, new Random(System.currentTimeMillis()).nextInt(20))

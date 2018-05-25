@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
+import com.logic.client.R;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -39,6 +42,7 @@ public abstract class BaseAppCompatActivity<P extends BasePresenter> extends RxA
 
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
+        initBar();
         initView();
         initData();
     }
@@ -82,6 +86,19 @@ public abstract class BaseAppCompatActivity<P extends BasePresenter> extends RxA
         super.onDestroy();
         bind.unbind();
     }
+
+    public void setBar(Toolbar toolbar, int all_columns, int ic_back) {
+        toolbar.setTitle(all_columns);
+        toolbar.setNavigationIcon(ic_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    protected abstract void initBar();
 
     protected abstract int getLayoutId();
 

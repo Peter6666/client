@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<com.logic.client.widget.LgLinearLayout-->
-        <!--android:id="@+id/lly"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:clickable="true"-->
-        <!--android:focusableInTouchMode="true"-->
-        <!--android:orientation="vertical"></com.logic.client.widget.LgLinearLayout>-->
-
     <include layout="@layout/loadding" android:id="@+id/ly_loadding"></include>
 
     <android.support.v4.widget.SwipeRefreshLayout
