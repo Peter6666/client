@@ -48,8 +48,8 @@ public class NewsMianFragment extends BaseFragment<NewsMianPresenter> implements
     private List<NewsFragment> mNewsFragments;
     private BaseFragmentPagerAdapter mFragmentPagerAdapter;
 
-    public NewsMianFragment(int i) {
-        super();
+    public static NewsMianFragment newInstance() {
+        return new NewsMianFragment();
     }
 
     @Override
@@ -71,26 +71,6 @@ public class NewsMianFragment extends BaseFragment<NewsMianPresenter> implements
 //        new BasePagerAdapter(mActivity,)
 //        vpHome.setAdapter();
 
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.i("ceshi", "HomeFragment onSaveInstanceState");
-        if (tlTab != null) {
-            outState.putInt("HomeFragment_tab", tlTab.getSelectedTabPosition());
-        }
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            int homeFragment_tab = savedInstanceState.getInt("HomeFragment_tab");
-            Log.i("ceshi", "HomeFragment onCreateView" + homeFragment_tab);
-        }
-
-        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -157,7 +137,7 @@ public class NewsMianFragment extends BaseFragment<NewsMianPresenter> implements
         int size = newsChannelTabses.size();
         mNewsFragments.clear();
         for (int i = 0; i <size ; i++) {
-            NewsFragment newsFragment = new NewsFragment(newsChannelTabses.get(i).getName());
+            NewsFragment newsFragment = NewsFragment.newInstance(newsChannelTabses.get(i).getName());
             mNewsFragments.add(newsFragment);
         }
         
@@ -199,7 +179,7 @@ public class NewsMianFragment extends BaseFragment<NewsMianPresenter> implements
             mFragmentPagerAdapter.notifyDataSetChanged();
 
         vpHome.setAdapter(mFragmentPagerAdapter);
-        vpHome.setOffscreenPageLimit(size);
+//        vpHome.setOffscreenPageLimit(size);
         tlTab.setupWithViewPager(vpHome);
 
         for (int i = 0; i < size; i++) {

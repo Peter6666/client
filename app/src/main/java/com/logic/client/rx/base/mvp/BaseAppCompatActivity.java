@@ -13,6 +13,8 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import org.polaric.colorful.ColorfulRxAppCompatActivity;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -22,7 +24,7 @@ import butterknife.Unbinder;
  * @desc
  */
 
-public abstract class BaseAppCompatActivity<P extends BasePresenter> extends RxAppCompatActivity implements IView {
+public abstract class BaseAppCompatActivity<P extends BasePresenter> extends ColorfulRxAppCompatActivity implements IView {
 
     public BaseAppCompatActivity mActivity;
     public P mPresenter;

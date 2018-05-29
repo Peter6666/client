@@ -26,6 +26,8 @@ import com.logic.client.rx.base.mvp.BaseAppCompatActivity;
 import com.logic.client.rx.base.mvp.BasePresenter;
 import com.logic.client.utils.CacheUtils;
 
+import org.polaric.colorful.ColorfulActivity;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -78,7 +80,6 @@ public class NewsTabTagActivity extends BaseAppCompatActivity<NewsTabTagPresente
 
     @Override
     protected void initView() {
-
 
         GridLayoutManager linearLayoutManager = new GridLayoutManager(mActivity, 4);
         GridLayoutManager linearLayoutManager1 = new GridLayoutManager(mActivity, 4);

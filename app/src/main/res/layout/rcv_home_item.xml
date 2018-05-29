@@ -152,7 +152,7 @@
            android:layout_height="match_parent"
            >
         <ImageView
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:id="@+id/iv_noly"
             android:layout_margin="@dimen/dp_4"
             android:layout_width="70dp"

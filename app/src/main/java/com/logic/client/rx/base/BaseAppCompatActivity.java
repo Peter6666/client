@@ -10,20 +10,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
-import com.logic.client.R;
-import com.logic.client.app.AppConstants;
-import com.logic.client.rx.RxBus;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
+import org.polaric.colorful.ColorfulRxAppCompatActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author logic.    Email:2778500267@qq.com
@@ -31,7 +26,7 @@ import io.reactivex.functions.Consumer;
  * @desc
  */
 
-public abstract class BaseAppCompatActivity extends RxAppCompatActivity {
+public abstract class BaseAppCompatActivity extends ColorfulRxAppCompatActivity {
 
     public BaseAppCompatActivity mActivity;
     private Unbinder bind;
@@ -39,7 +34,7 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.DayTheme);
+
         mActivity = this;
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
@@ -47,20 +42,19 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity {
         initView();
         initData();
 
-        RxBus.getIntance().addSubscription(String.class, RxBus.getIntance().doSubscribe(String.class, new Consumer<String>() {
-            @Override
-            public void accept(String o) throws Exception {
-                if (o.equals(AppConstants.SET_THEME)) {
-                    setTheme(R.style.DayTheme);
-                    Log.i("cesjo","DayTheme");
-                }
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                throwable.printStackTrace();
-            }
-        }));
+//        RxBus.getIntance().addSubscription(String.class, RxBus.getIntance().doSubscribe(String.class, new Consumer<String>() {
+//            @Override
+//            public void accept(String o) throws Exception {
+//                if (o.equals(AppConstants.SET_THEME)) {
+//                    setTheme(R.style.DayTheme);
+//                }
+//            }
+//        }, new Consumer<Throwable>() {
+//            @Override
+//            public void accept(Throwable throwable) throws Exception {
+//                throwable.printStackTrace();
+//            }
+//        }));
 
     }
 

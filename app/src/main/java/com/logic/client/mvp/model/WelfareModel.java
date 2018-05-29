@@ -24,7 +24,7 @@ import io.reactivex.functions.Function;
 public class WelfareModel extends BaseModel {
 
     public Flowable<List<Results>> getData(int page , int size , final List<Results> data){
-        return OkClient.getDefault(OkConstants.TYPE_GANK_HOST).getWelfareList(size,page)
+        return OkClient.getDefault(OkConstants.TYPE_GANK_HOST).getWelfareList(OkClient.getCacheControl(),size,page)
                 .toFlowable(BackpressureStrategy.BUFFER)
                 .map(new Function<GankData, List<Results>>() {
                     @Override

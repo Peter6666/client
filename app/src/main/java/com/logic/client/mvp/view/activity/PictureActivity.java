@@ -15,6 +15,8 @@ import com.logic.client.adapter.GridAdapter;
 import com.logic.client.mvp.view.fragment.PhotoViewFragment;
 import com.logic.client.rx.base.BaseAppCompatActivity;
 
+import org.polaric.colorful.Colorful;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -105,10 +107,4 @@ public class PictureActivity extends BaseAppCompatActivity {
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

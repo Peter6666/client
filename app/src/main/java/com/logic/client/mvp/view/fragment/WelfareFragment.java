@@ -90,15 +90,10 @@ public class WelfareFragment extends BaseFragment<WelfarePresenter> implements V
         rcvWelfare.setLayoutManager(gridLayoutManager);
         fab.setOnClickListener(this);
 
-    }
-
-    @Override
-    protected void initData() {
-
         mData = new ArrayList<>();
-        mPresenter.getdata( mData, mPage, mSize);
         mAdapter = new WelfareAdapter(R.layout.rcv_welfare_item, mData);
         rcvWelfare.setAdapter(mAdapter);
+
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {// 滑动最后一个Item的时候回调onLoadMoreRequested方法
             @Override
             public void onLoadMoreRequested() {
@@ -119,6 +114,11 @@ public class WelfareFragment extends BaseFragment<WelfarePresenter> implements V
             }
         });
 
+    }
+
+    @Override
+    protected void initData() {
+        mPresenter.getdata( mData, mPage, mSize);
     }
 
     @Override

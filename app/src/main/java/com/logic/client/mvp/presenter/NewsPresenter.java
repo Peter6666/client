@@ -12,6 +12,7 @@ import com.logic.client.rx.RxBus;
 import com.logic.client.rx.RxSchedulers;
 import com.logic.client.rx.base.BaseApplication;
 import com.logic.client.rx.base.mvp.BasePresenter;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import org.reactivestreams.Subscription;
 
@@ -45,6 +46,7 @@ public class NewsPresenter extends BasePresenter<NewsModel,NewsFragment> {
     public void getNews(final List<IdataNews.Idate> iData, String type, int page, String site) {
 
         getModel().getNews(type, page, site)
+                .compose(getView().<IdataNews>bindToLife(FragmentEvent.PAUSE))
                 .map(new Function<IdataNews, List<IdataNews.Idate>>() {
                     private boolean hasNext;
                     @Override

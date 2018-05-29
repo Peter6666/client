@@ -18,7 +18,7 @@ public class NewsModel extends BaseModel {
 
 
     public Flowable<IdataNews> getNews(String type, int page, String site){
-        return OkClient.getDefault(OkConstants.TYPE_IDATA_HOST).getIndataNews(type,page,site)
+        return OkClient.getDefault(OkConstants.TYPE_IDATA_HOST).getIndataNews(OkClient.getCacheControl(),type,page,site)
                 .toFlowable(BackpressureStrategy.BUFFER);
     }
 

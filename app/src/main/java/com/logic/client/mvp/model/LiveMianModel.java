@@ -26,7 +26,7 @@ public class LiveMianModel extends BaseModel {
 
 
     public Flowable<List<LiveChannelTabs>> getLiveChannelTabs(){
-        return OkClient.getDefault(OkConstants.TYPE_LIVE_HOST).getLiveChannelTabs()
+        return OkClient.getDefault(OkConstants.TYPE_LIVE_HOST).getLiveChannelTabs(OkClient.getCacheControl())
                 .toFlowable(BackpressureStrategy.BUFFER);
     }
 

@@ -32,6 +32,7 @@ public class WelfarePresenter extends BasePresenter<WelfareModel, WelfareFragmen
 
     public void getdata(final List<Results> results, int page, int size){
         getModel().getData(size,page,results)
+                .compose(getView().<List<Results>>bindToLifecycle())
                 .compose(RxSchedulers.<List<Results>>FlowableToMain())
                 .subscribe(new FlowableSubscriber<List<Results>>() {
                     private Subscription s;

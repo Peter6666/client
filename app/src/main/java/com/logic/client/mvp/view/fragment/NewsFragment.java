@@ -1,5 +1,6 @@
 package com.logic.client.mvp.view.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -69,6 +70,18 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
         this.name = name;
     }
 
+    public NewsFragment() {
+
+    }
+
+    public static NewsFragment newInstance(String name) {
+        NewsFragment fragment = new NewsFragment();
+        Bundle args = new Bundle();
+        args.putString("name", name);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     protected void initBar() {
 
@@ -85,17 +98,18 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
     }
 
     @Override
-    protected void initView() {
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
-        rcvHome.setLayoutManager(linearLayoutManager);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.i("ceshi", name+"setUserVisibleHint"+isVisibleToUser  +" isViewCreated"+isViewCreated  +" getUserVisibleHint()"+getUserVisibleHint());
     }
 
     @Override
-    protected void initData() {
+    protected void initView() {
+        this.name  = getArguments().getString("name");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
+        rcvHome.setLayoutManager(linearLayoutManager);
 
         mData = new ArrayList<>();
-        mPresenter.getQQnews(mData, name, mPage);
         mAdapter = new NewsAdapter(mData);
         rcvHome.setAdapter(mAdapter);
 //        mAdapter.setUpFetchEnable(true);//自动加载
@@ -147,6 +161,13 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
 
     }
 
+    @Override
+    protected void initData() {
+        Log.i("ceshi","initData"+name);
+        mPresenter.getQQnews(mData, name, mPage);
+
+    }
+
 
     public void ScrollToTop() {
         if (rcvHome != null)
@@ -156,6 +177,8 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
     public void setLoadStatus(int status) {
         switch (status) {
             case LgLinearLayout.STATUS_LOAD:
+                if (ly_loadding==null)
+                    return;
                 ly_loadding.setVisibility(View.VISIBLE);
                 STATUS_CURRENT = LgLinearLayout.STATUS_LOAD;
                 tv_load.setVisibility(View.VISIBLE);
@@ -165,6 +188,8 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
                 break;
 
             case LgLinearLayout.STATUS_FAIL:
+                if (ly_loadding==null)
+                    return;
                 ly_loadding.setVisibility(View.VISIBLE);
                 STATUS_CURRENT = LgLinearLayout.STATUS_FAIL;
                 tv_load.setVisibility(View.VISIBLE);
@@ -174,6 +199,8 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
                 break;
 
             case LgLinearLayout.STATUS_END:
+                if (ly_loadding==null)
+                    return;
                 STATUS_CURRENT = LgLinearLayout.STATUS_END;
                 ly_loadding.setVisibility(View.GONE);
                 break;
@@ -224,6 +251,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
 
     @Override
     public void stopLoading() {
+
         if (mPage == 1)
             setLoadStatus(LgLinearLayout.STATUS_END);
         mAdapter.notifyDataSetChanged();
@@ -249,6 +277,49 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements LgLinea
     public void onDestroy() {
         super.onDestroy();
         mPresenter.onDestroy();
-        Log.i("ceshi",name+"   onDestroy");
+        Log.i("ceshi",name+"   onDestroy"+ name);
+    }
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        Log.i("ceshi","   onAttach"+ name);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i("ceshi","   onCreate"+ name);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.i("ceshi","   onViewCreated"+ name);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("ceshi","   onResume"+ name);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i("ceshi","   onPause"+ name);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("ceshi","   onStop"+ name);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i("ceshi","   onDetach"+ name);
     }
 }

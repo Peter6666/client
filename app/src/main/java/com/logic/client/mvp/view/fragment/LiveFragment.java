@@ -62,11 +62,24 @@ public class LiveFragment extends BaseFragment<LivePresenter> {
     private List<LiveChannel.BigsquareBean> mBigsquare;
     private LiveAdapter mLiveAdapter;
 
+    public LiveFragment() {
+
+
+    }
+
     public LiveFragment(String name, String slug) {
         this.name = name;
         this.slug = slug;
     }
 
+    public static LiveFragment newInstance(String name, String slug) {
+        LiveFragment fragment = new LiveFragment();
+        Bundle args = new Bundle();
+        args.putString("name", name);
+        args.putString("slug", slug);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected void initBar() {
@@ -85,10 +98,44 @@ public class LiveFragment extends BaseFragment<LivePresenter> {
 
     @Override
     protected void initView() {
+        this.name  = getArguments().getString("name");
+        this.slug= getArguments().getString("slug");
+
         mLiveChannel = new LiveChannel();
         mData = new ArrayList<LiveChannel.DataBean>();
         mBigsquare = new ArrayList<LiveChannel.BigsquareBean>();
-        mPresenter.getLive(slug);
+
+        mLiveAdapter = new LiveAdapter(R.layout.rcv_live_item, mData);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mActivity, 2);
+        rcvLive.setLayoutManager(gridLayoutManager);
+
+//        getHeadView();
+        rcvLive.addItemDecoration(new SpacesItemDecoration(5));
+        rcvLive.setAdapter(mLiveAdapter);
+
+
+
+        srlLoadmore.setColorSchemeResources(//颜色
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        srlLoadmore.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+//                mPresenter.getQQnews(mData, name, mPage);
+                srlLoadmore.setRefreshing(false);
+            }
+        });
+
+        mLiveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                LiveChannel.DataBean dataBean = mData.get(i);
+                LiveRoomActivity.main(mActivity,dataBean.getUid());
+            }
+        });
+
     }
 
     public View getHeadView() {
@@ -114,35 +161,7 @@ public class LiveFragment extends BaseFragment<LivePresenter> {
 
     @Override
     protected void initData() {
-
-        mLiveAdapter = new LiveAdapter(R.layout.rcv_live_item, mData);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mActivity, 2);
-        rcvLive.setLayoutManager(gridLayoutManager);
-
-        getHeadView();
-        rcvLive.addItemDecoration(new SpacesItemDecoration(5));
-        rcvLive.setAdapter(mLiveAdapter);
-
-        srlLoadmore.setColorSchemeResources(//颜色
-                android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-        srlLoadmore.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-//                mPresenter.getQQnews(mData, name, mPage);
-                srlLoadmore.setRefreshing(false);
-            }
-        });
-
-        mLiveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                LiveChannel.DataBean dataBean = mData.get(i);
-                LiveRoomActivity.main(mActivity,dataBean.getUid());
-            }
-        });
+        mPresenter.getLive(slug);
     }
 
     public void ScrollToTop() {
@@ -171,13 +190,14 @@ public class LiveFragment extends BaseFragment<LivePresenter> {
         if (liveChannel == null)
             return;
         List<LiveChannel.BigsquareBean> bigsquare = liveChannel.getBigsquare();
-        if (bigsquare != null && bigsquare.size() > 0) {
-            mBanner.setVisibility(View.VISIBLE);
-            mBanner.notifyDataSetChanged();
-        } else {
-            mBanner.setVisibility(View.GONE);
-        }
-
+//        if (bigsquare != null && bigsquare.size() > 0 && mBanner!=null) {
+//            mBanner.setVisibility(View.VISIBLE);
+////            mBanner.getViewPager().getAdapter().notifyDataSetChanged();
+////            mBanner.notifyDataSetChanged();
+//        } else {
+//            mBanner.setVisibility(View.GONE);
+//        }
+//        mBanner.getViewPager().getAdapter().notifyDataSetChanged();
         List<LiveChannel.DataBean> data = liveChannel.getData();
         if (data != null && data.size() > 0)
             mLiveAdapter.notifyDataSetChanged();
@@ -236,6 +256,23 @@ public class LiveFragment extends BaseFragment<LivePresenter> {
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageView);
 
+        }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mBanner!=null && !mBanner.isTurning()) {
+            mBanner.startTurning(4000);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(mBanner!=null){
+            mBanner.stopTurning();
         }
 
     }

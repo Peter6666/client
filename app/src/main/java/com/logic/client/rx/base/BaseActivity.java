@@ -10,6 +10,8 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.components.RxActivity;
 
+import org.polaric.colorful.ColorfulRxActivity;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -19,7 +21,7 @@ import butterknife.Unbinder;
  * @desc
  */
 
-public abstract class BaseActivity extends RxActivity {
+public abstract class BaseActivity extends ColorfulRxActivity {
 
     public BaseActivity mActivity;
     private Unbinder bind;

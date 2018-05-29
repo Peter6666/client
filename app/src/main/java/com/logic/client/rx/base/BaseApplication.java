@@ -6,6 +6,8 @@ import android.content.res.Resources;
 
 import com.logic.client.rx.RxBus;
 
+import org.polaric.colorful.Colorful;
+
 import io.vov.vitamio.Vitamio;
 
 /**
@@ -25,6 +27,7 @@ public class BaseApplication extends Application {
         mContext = this;
         resources = mContext.getResources();
         boolean initialized = Vitamio.isInitialized(mContext);
+        Colorful.init(mContext);
     }
 
     public static Context getAppContext() {

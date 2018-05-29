@@ -7,7 +7,7 @@
     android:layout_height="120dp">
     <ImageView
         android:id="@+id/iv_gv_img"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

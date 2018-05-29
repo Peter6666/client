@@ -12,6 +12,7 @@ import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -30,21 +31,25 @@ public interface OkService {
 
     @GET(OkConstants.ANDROID + "{size}/{page}")
     Observable<GankData> getAndroidList(
+            @Header("Cache-Control") String cacheControl,
             @Path("size") int size,
             @Path("page") int page);
 
     @GET(OkConstants.IOS + "{size}/{page}")
     Observable<GankData> getIOSList(
+            @Header("Cache-Control") String cacheControl,
             @Path("size") int size,
             @Path("page") int page);
 
     @GET(OkConstants.WELFARE + "{size}/{page}")
     Observable<GankData> getWelfareList(
+            @Header("Cache-Control") String cacheControl,
             @Path("size") int size,
             @Path("page") int page);
 
     @GET("qihoo?apikey=" + OkConstants.IDATA_APPKEY)
     Observable<IdataNews> getIndataNews(
+            @Header("Cache-Control") String cacheControl,
             @Query("kw") String kw,
             @Query("pageToken") int page,
             @Query("site") String site
@@ -63,7 +68,7 @@ public interface OkService {
      * @return categories/list.json
      */
     @GET("json/app/index/category/info-android.json?v=3.0.1&os=1&ver=4")
-    Observable<List<LiveChannelTabs>> getLiveChannelTabs();
+    Observable<List<LiveChannelTabs>> getLiveChannelTabs(@Header("Cache-Control") String cacheControl);
 //
 //    /**
 //     * 获取推荐列表
@@ -85,7 +90,7 @@ public interface OkService {
      * @return
      */
     @GET("json/categories/{slug}/list.json?v=3.0.1&os=1&ver=4")
-    Observable<LiveChannel> getLiveListByChannel(@Path("slug") String slug);
+    Observable<LiveChannel> getLiveListByChannel(@Header("Cache-Control") String cacheControl, @Path("slug") String slug);
 
     /**
      * 进入房间

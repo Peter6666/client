@@ -15,23 +15,21 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorAccent"
+            android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorAccent"
+            android:background="?attr/colorPrimary"
             android:orientation="horizontal">
-
-
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tl_tab"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:tabBackground="?attr/colorAccent"
+                app:tabBackground="?attr/colorPrimary"
                 app:tabIndicatorColor="@color/colorWhite"
                 app:tabMode="scrollable"
                 android:layout_weight="1">
@@ -67,7 +65,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="?attr/colorAccent"
         app:srcCompat="@mipmap/ic_packup" />
 
 </android.support.design.widget.CoordinatorLayout>

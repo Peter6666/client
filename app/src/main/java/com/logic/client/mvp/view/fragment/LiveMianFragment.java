@@ -49,6 +49,10 @@ public class LiveMianFragment extends BaseFragment<LiveMianPresenter>  {
     private List<LiveFragment> mLiveFragments;
     private BaseFragmentPagerAdapter mFragmentPagerAdapter;
 
+    public static LiveMianFragment newInstance() {
+        return new LiveMianFragment();
+    }
+
     @Override
     protected void initBar() {
         fab.setOnClickListener(new View.OnClickListener() {
@@ -108,8 +112,8 @@ public class LiveMianFragment extends BaseFragment<LiveMianPresenter>  {
         int size = liveChannelTabses.size();
         mLiveFragments.clear();
         for (int i = 0; i <size ; i++) {
-            LiveFragment newsFragment = new LiveFragment(liveChannelTabses.get(i).getName(),liveChannelTabses.get(i).getSlug());
-            mLiveFragments.add(newsFragment);
+            LiveFragment liveFragment = LiveFragment.newInstance(liveChannelTabses.get(i).getName(), liveChannelTabses.get(i).getSlug());
+            mLiveFragments.add(liveFragment);
         }
 
         if (mFragmentPagerAdapter == null) {

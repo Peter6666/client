@@ -40,7 +40,7 @@
                 app:layout_collapseMode="pin"
                 android:layout_width="match_parent"
                 app:navigationIcon="@mipmap/ic_back"
-                android:background="?attr/colorAccent"
+                app:background="?attr/colorPrimary"
                 android:layout_height="?attr/actionBarSize">
             </android.support.v7.widget.Toolbar>
 

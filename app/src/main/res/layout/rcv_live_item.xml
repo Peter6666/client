@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="6dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="@color/colorWhite">
     <ImageView
         android:id="@+id/iv_img"
         android:layout_width="match_parent"

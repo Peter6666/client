@@ -126,6 +126,8 @@ public class NewsDetailsActivity extends BaseActivity {
     public static int STATUS_CURRENT = 0;
 
     public void setLoadStatus(int status) {
+        if (ly_loadding==null)
+        return;
         switch (status) {
             case LgLinearLayout.STATUS_LOAD:
                 ly_loadding.setVisibility(View.VISIBLE);

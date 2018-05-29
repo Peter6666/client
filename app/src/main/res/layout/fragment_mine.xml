@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorReply"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/rl_bg"
-        android:background="?attr/colorAccent"
+        android:background="?attr/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="180dp">
 
@@ -35,7 +34,6 @@
     </RelativeLayout>
 
     <View
-        android:background="@color/colorReply"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_10"></View>
 
@@ -57,6 +55,7 @@
             android:drawablePadding="@dimen/dp_10"
             android:gravity="center"
             android:layout_gravity="center"
+            android:textColor="@color/text_color"
             />
         <TextView
             android:paddingRight="@dimen/dp_20"
@@ -71,7 +70,6 @@
     </TableRow>
     <View
         android:background="@color/colorDark"
-        android:layout_marginLeft="@dimen/dp_16"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0.5"></View>
 
@@ -82,6 +80,7 @@
         android:layout_height="wrap_content"
         >
         <TextView
+            android:textColor="@color/text_color"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_10"
@@ -107,7 +106,6 @@
     </TableRow>
     <View
         android:background="@color/colorDark"
-        android:layout_marginLeft="@dimen/dp_16"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0.5"></View>
 
@@ -129,6 +127,8 @@
             android:drawablePadding="@dimen/dp_10"
             android:gravity="center"
             android:layout_gravity="center"
+            android:textColor="@color/text_color"
+
             />
         <TextView
             android:paddingRight="@dimen/dp_20"
@@ -143,7 +143,6 @@
     </TableRow>
     <View
         android:background="@color/colorDark"
-        android:layout_marginLeft="@dimen/dp_16"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0.5"></View>
 
@@ -155,6 +154,7 @@
         android:layout_height="wrap_content"
         >
         <TextView
+            android:textColor="@color/text_color"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_10"
@@ -180,7 +180,6 @@
     </TableRow>
 
     <View
-        android:background="@color/colorReply"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_10"></View>
 
@@ -191,6 +190,7 @@
         android:layout_height="wrap_content"
         >
         <TextView
+            android:textColor="@color/text_color"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_10"

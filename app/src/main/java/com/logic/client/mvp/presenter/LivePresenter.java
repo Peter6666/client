@@ -1,5 +1,7 @@
 package com.logic.client.mvp.presenter;
 
+import android.util.Log;
+
 import com.logic.client.R;
 import com.logic.client.app.AppConstants;
 import com.logic.client.bean.IdataNews;
@@ -8,16 +10,20 @@ import com.logic.client.mvp.model.LiveModel;
 import com.logic.client.mvp.model.NewsModel;
 import com.logic.client.mvp.view.fragment.LiveFragment;
 import com.logic.client.mvp.view.fragment.NewsFragment;
+import com.logic.client.net.OkClient;
+import com.logic.client.net.OkConstants;
 import com.logic.client.rx.RxBus;
 import com.logic.client.rx.RxSchedulers;
 import com.logic.client.rx.base.BaseApplication;
 import com.logic.client.rx.base.mvp.BasePresenter;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.FlowableSubscriber;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -35,6 +41,7 @@ public class LivePresenter extends BasePresenter<LiveModel, LiveFragment> {
     public void getLive(final String slug) {
 
         getModel().getLive(slug)
+                .compose(getView().<LiveChannel>bindToLife(FragmentEvent.PAUSE))
                 .map(new Function<LiveChannel, LiveChannel>() {
                     @Override
                     public LiveChannel apply(@NonNull LiveChannel liveChannel) throws Exception {
@@ -44,7 +51,6 @@ public class LivePresenter extends BasePresenter<LiveModel, LiveFragment> {
                             getView().returnLiveData(data);
                         if (bigsquare != null && bigsquare.size() > 0)
                             getView().returnBanner(bigsquare);
-
                             return liveChannel;
                     }
                 })
@@ -59,6 +65,7 @@ public class LivePresenter extends BasePresenter<LiveModel, LiveFragment> {
                     @Override
                     public void onNext(LiveChannel liveChannel) {
                             getView().returnLiveChannel(liveChannel);
+                        Log.i("ceshi","onNext" +slug);
                     }
 
                     @Override

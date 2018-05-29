@@ -29,6 +29,7 @@ public class LiveMianPresenter extends BasePresenter<LiveMianModel,LiveMianFragm
 
     public void getLiveChannelTabs(){
         getModel().getLiveChannelTabs()
+                .compose(getView().<List<LiveChannelTabs>>bindToLifecycle())
                 .compose(RxSchedulers.<List<LiveChannelTabs>>FlowableToMain())
                 .subscribe(new FlowableSubscriber<List<LiveChannelTabs>>() {
                     @Override

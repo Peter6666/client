@@ -65,7 +65,9 @@ public class NewsMianPresenter extends BasePresenter<NewsMianModel, NewsMianFrag
 //    }
 
     public void getSelectChannel(){
-        getModel().getSelectChannel().subscribe(new FlowableSubscriber<List<NewsChannelTabs>>() {
+        getModel().getSelectChannel()
+                .compose(getView().<List<NewsChannelTabs>>bindToLife())
+                .subscribe(new FlowableSubscriber<List<NewsChannelTabs>>() {
             @Override
             public void onSubscribe(@NonNull Subscription s) {
                 s.request(1000);

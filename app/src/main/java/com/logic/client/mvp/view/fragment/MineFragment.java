@@ -3,6 +3,7 @@ package com.logic.client.mvp.view.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.IntentCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +15,13 @@ import android.widget.TextView;
 
 import com.logic.client.R;
 import com.logic.client.app.AppConstants;
+import com.logic.client.mvp.view.activity.ThemeActivity;
 import com.logic.client.net.OkConstants;
 import com.logic.client.rx.RxBus;
 import com.logic.client.rx.base.BaseFragment;
+
+import org.polaric.colorful.ColorPickerDialog;
+import org.polaric.colorful.Colorful;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,15 +56,25 @@ public class MineFragment extends BaseFragment {
     protected int getLayoutId() {
         return R.layout.fragment_mine;
     }
-    int i=0;
+    boolean isNight = false ;
     @Override
     protected void initView() {
-        mActivity.setTheme(R.style.DayTheme);
+
         trTheme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                RxBus.getIntance().post(AppConstants.SET_THEME);
+                Log.i("ceshi","trTheme");
+                ThemeActivity.main(mActivity,ThemeActivity.class);
+//                ColorPickerDialog dialog = new ColorPickerDialog(mActivity);
+//                dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
+//                    @Override
+//                    public void onColorSelected(Colorful.ThemeColor color) {
+//                        Colorful.config(getContext()).primaryColor(color).apply();
+//                        Colorful.config(getContext()).accentColor(color).apply();
+//
+//                    }
+//                });
+//                dialog.show();
             }
         });
     }

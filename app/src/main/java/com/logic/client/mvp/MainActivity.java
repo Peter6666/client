@@ -40,8 +40,7 @@ public class MainActivity extends BaseAppCompatActivity implements TabLayout.OnT
     private String[] mTabs = {BaseApplication.getResource().getString(R.string.home),
             BaseApplication.getResource().getString(R.string.welfare),
             BaseApplication.getResource().getString(R.string.video),
-//            BaseApplication.getResource().getString(R.string.mine)
-    };
+            BaseApplication.getResource().getString(R.string.mine)};
 
     private int[] mUnSelectTab = {R.mipmap.icon_tabbar_subscription, R.mipmap.icon_tabbar_notification,
             R.mipmap.icon_tabbar_home, R.mipmap.icon_tabbar_me};
@@ -59,14 +58,14 @@ public class MainActivity extends BaseAppCompatActivity implements TabLayout.OnT
     protected void initView() {
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        NewsMianFragment fragment = new NewsMianFragment(1);
+        NewsMianFragment fragment = new NewsMianFragment();
         WelfareFragment welfareFragment = new WelfareFragment();
         LiveMianFragment fragment2 = new LiveMianFragment();
         MineFragment fragment3 = new MineFragment();
         fragments.add(fragment);
         fragments.add(welfareFragment);
         fragments.add(fragment2);
-//        fragments.add(fragment3);
+        fragments.add(fragment3);
         BaseFragmentPagerAdapter baseFragmentPagerAdapter = new BaseFragmentPagerAdapter(getSupportFragmentManager(), fragments);
         vpContentMain.setAdapter(baseFragmentPagerAdapter);
         vpContentMain.setOffscreenPageLimit(4);

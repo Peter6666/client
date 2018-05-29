@@ -20,7 +20,7 @@ public class LiveModel extends BaseModel {
 
     public Flowable<LiveChannel> getLive(String slug){
         return OkClient.getDefault(OkConstants.TYPE_LIVE_HOST)
-                .getLiveListByChannel(slug)
+                .getLiveListByChannel(OkClient.getCacheControl(),slug)
                 .toFlowable(BackpressureStrategy.BUFFER);
     }
 

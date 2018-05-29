@@ -42,6 +42,7 @@
         <activity android:name=".mvp.view.activity.PictureActivity"></activity>
         <activity android:name=".mvp.view.activity.NewsDetailsActivity"></activity>
         <activity android:name=".mvp.view.activity.LiveRoomActivity"></activity>
+        <activity android:name=".mvp.view.activity.ThemeActivity"></activity>
 
     </application>
 

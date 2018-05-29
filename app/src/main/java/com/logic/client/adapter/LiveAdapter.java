@@ -51,13 +51,13 @@ public class LiveAdapter extends BaseQuickAdapter<LiveChannel.DataBean, BaseView
             tvName.setText(getNick);
         }
 
-        String status = dataBean.getStatus();
-        if (isNotEmpty(status)){
-            if (status.equals("2"))
-                tvStatus.setVisibility(View.VISIBLE);
-            else
-                tvStatus.setVisibility(View.GONE);
-        }
+//        String status = dataBean.getStatus();
+//        if (isNotEmpty(status)){
+//            if (status.equals("2"))
+//                tvStatus.setVisibility(View.VISIBLE);
+//            else
+//                tvStatus.setVisibility(View.GONE);
+//        }
 
         String live_thumb = dataBean.getLive_thumb();
         Glide.with(mContext)

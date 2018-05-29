@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends RxFragment i
     public P mPresenter;
     public Unbinder bind;
     public FragmentActivity mActivity;
+    protected boolean isViewCreated = false;
+    protected boolean isLoad = false;
 
     @Nullable
     @Override
@@ -48,10 +51,31 @@ public abstract class BaseFragment<P extends BasePresenter> extends RxFragment i
             rootView = inflater.inflate(getLayoutId(), container, false);
         }
         bind = ButterKnife.bind(this, rootView);
+
         initBar();
         initView();
-        initData();
+        isViewCreated = true;
+        if (getUserVisibleHint()) {//可见 开始加载数据
+            if (isViewCreated) {
+                Log.i("ceshi","onCreateView initData");
+                initData();
+            }
+        }
         return rootView;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (getUserVisibleHint()) {//可见 开始加载数据
+            if (isViewCreated) {
+                Log.i("ceshi","setUserVisibleHint initData");
+                initData();
+            }
+        } else {//不可见 停止加载数据
+
+        }
     }
 
     protected abstract void initBar();
@@ -85,6 +109,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends RxFragment i
         super.onDestroyView();
         if (bind != null)
             bind.unbind();
+
+        isViewCreated = false;
+        isLoad = false;
+
     }
 
     protected abstract int getLayoutId();

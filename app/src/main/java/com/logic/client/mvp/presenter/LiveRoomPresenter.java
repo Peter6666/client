@@ -26,6 +26,7 @@ public class LiveRoomPresenter extends BasePresenter<LiveRoomModel, LiveRoomActi
 
     public void getLiveRoom(String uid) {
         getModel().getLiveRoom(uid)
+                .compose(getView().<LiveRoom>bindToLifecycle())
                 .map(new Function<LiveRoom, LiveRoom>() {
                     @Override
                     public LiveRoom apply(@NonNull LiveRoom liveRoom) throws Exception {
